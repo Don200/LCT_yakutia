@@ -1,12 +1,12 @@
 from fastapi import FastAPI
-from saigamodel import Conversation, Model
+#from saigamodel import Conversation, Model
 
 
 app = FastAPI(
     title='Kalhoznay zaglushka'
 )
-conversation = Conversation()
-model = Model()
+#conversation = Conversation()
+#model = Model()
 
 @app.get("/text")
 def generate_offer(inputs: str):
