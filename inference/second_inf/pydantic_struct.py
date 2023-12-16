@@ -42,6 +42,7 @@ class Chanel(BaseModel):
 
 class TextInfo(BaseModel):
     text_id: int
+    text: str
     note: str
     product: Product
     chanel: Chanel

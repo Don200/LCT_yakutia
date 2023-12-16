@@ -11,16 +11,14 @@ app = FastAPI(
 @app.post("/text")
 def generate_offer(users_info: DatasetClients) -> Request:
     user_requests = []
-    for user in users_info:
+    for user in users_info.clients: #идём по каждому пользователю и генерим для него 
         text_requests = []
-        print(user)
-        user = user[1][0]
         for text_prompt in user.text_info: # прогоняемся по списку промптов, которые нужны для юзера
             product = text_prompt.product
             chanel = text_prompt.chanel
             client_text_request = {
             "text_id": text_prompt.text_id,
-            "text": "text xui" , # TODO: добавить код модели
+            "text": "text xui " + str(np.random.randint(1,100)) , # TODO: добавить код модели
             "note": text_prompt.note,
             "product": {
                 "product_id": product.product_id,
