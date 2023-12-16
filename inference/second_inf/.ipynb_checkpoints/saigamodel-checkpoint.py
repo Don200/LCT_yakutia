@@ -9,6 +9,7 @@ DEFAULT_SYSTEM_PROMPT = """Ты — Сайга, русскоязычный ав�
                             ассистент для составления маркетинговых предложений для Газпромбанка. Ты придерживаешься 
                             формального стиля речи. 
                             Ты получаешь инструкцию и генерируешь предложение по полученным данным."""
+CACHE_DIR_MODELS = 'models'
 
 class Conversation:
     def __init__(
@@ -67,21 +68,23 @@ def set_config(prev_config, temperature: float, top_p: float):
 
 class Model:
     def __init__(self):
-        self.config = PeftConfig.from_pretrained(MODEL_NAME)
+        self.config = PeftConfig.from_pretrained(MODEL_NAME,cache_dir = CACHE_DIR_MODELS)
         self.model = AutoModelForCausalLM.from_pretrained(
             self.config.base_model_name_or_path,
             torch_dtype=torch.float16,
             device_map="auto",
+            cache_dir = CACHE_DIR_MODELS
         )
         self.model = PeftModel.from_pretrained(
             self.model,
             MODEL_NAME,
-            torch_dtype=torch.float16
+            torch_dtype=torch.float16,
+            cache_dir = CACHE_DIR_MODELS
         )
         self.model.eval()
 
-        self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False)
-        self.generation_config = GenerationConfig.from_pretrained(MODEL_NAME)
+        self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=False, cache_dir = CACHE_DIR_MODELS)
+        self.generation_config = GenerationConfig.from_pretrained(MODEL_NAME, cache_dir = CACHE_DIR_MODELS)
 
     def generate(self, model, tokenizer, prompt, generation_config):
         data = tokenizer(prompt, return_tensors="pt", add_special_tokens=False)

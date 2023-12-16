@@ -75,9 +75,9 @@ class ClientTextRequest(BaseModel):
 class ClientRequest(BaseModel):
     vid: str
     dataset_id: DatasetId
-    text_info: list[ClientTextRequest]
+    text_info: List[ClientTextRequest]
 
 #собираем датасет
 class Request(BaseModel):
-    UserRequest: list[ClientRequest]
+    UserRequest: List[ClientRequest]
 

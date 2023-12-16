@@ -76,7 +76,7 @@ def generate_offer(json_dict: DatasetClients) -> Request:
     :param json_string: принимает json c бека
     :return: promt персонализированный под каждого клиента банка
     """
-    data = json_dict.model_dump()
+    data = json_dict.dict()
     prompt_generator = PromptGenerator()
     # итерируемся по массиву клиентов
     for s in data['clients']:
