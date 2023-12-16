@@ -1,6 +1,5 @@
 import json
 import pickle
-from ast import literal_eval
 from fastapi import FastAPI
 from prompts import PromptGenerator
 from pydantic_struct import Client, DatasetClients, ClientTextRequest, ClientRequest, Request

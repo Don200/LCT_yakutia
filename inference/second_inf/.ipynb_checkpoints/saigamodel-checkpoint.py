@@ -71,7 +71,7 @@ class Model:
         self.model = AutoModelForCausalLM.from_pretrained(
             self.config.base_model_name_or_path,
             torch_dtype=torch.float16,
-            device_map="auto"
+            device_map="auto",
         )
         self.model = PeftModel.from_pretrained(
             self.model,

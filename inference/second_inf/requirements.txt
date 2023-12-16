@@ -4,3 +4,4 @@ pydantic
 torch
 peft
 transformers
+sentencepiece
